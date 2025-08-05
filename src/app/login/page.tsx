@@ -5,7 +5,7 @@ export default function Login() {
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <Image
-        src="/background.jpg"
+        src="/log-background.jpg"
         alt="Background Image"
         layout="fill"
         objectFit="cover"
