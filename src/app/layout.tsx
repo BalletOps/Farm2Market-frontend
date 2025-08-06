@@ -6,18 +6,23 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Suspense } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { Navigation } from "@toolpad/core/AppProvider";
 
-export const NAVIGATION = [
+export const NAVIGATION: Navigation = [
   // ...
-    {
-    segment: 'home',
-    title: 'Home',
+  {
+    kind: "header",
+    title: "Main items",
+  },
+  {
+    segment: "home",
+    title: "Home",
     icon: <DashboardIcon />,
   },
-  
+
   {
-    segment: 'orders',
-    title: 'Orders',
+    segment: "orders",
+    title: "Orders",
     icon: <ShoppingCartIcon />,
   },
   // ...
