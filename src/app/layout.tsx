@@ -1,16 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { NextAppProvider } from "@toolpad/core/nextjs";
+import LinearProgress from "@mui/material/LinearProgress";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { Suspense } from "react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export const NAVIGATION = [
+  // ...
+    {
+    segment: 'home',
+    title: 'Home',
+    icon: <DashboardIcon />,
+  },
+  
+  {
+    segment: 'orders',
+    title: 'Orders',
+    icon: <ShoppingCartIcon />,
+  },
+  // ...
+];
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const BRANDING = {
+  title: "Farm2Market",
+  // logo: "/logo.png", // Ensure logo.png exists in /public
+  homeUrl: "/dashboard",
+};
 
 export const metadata: Metadata = {
   title: "Farm2Market",
@@ -24,10 +41,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <Suspense fallback={<LinearProgress />}>
+            <NextAppProvider navigation={NAVIGATION} branding={BRANDING}>
+              {children}
+            </NextAppProvider>
+          </Suspense>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
